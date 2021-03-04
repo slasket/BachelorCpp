@@ -5,8 +5,10 @@
 #include "app.h"
 #include <cassert>
 
+//a test
 int main() {
     BachelorCpp::Greeter greeter;
     assert(greeter.greeting().compare("Hello, World!") == 0);
     return 0;
+
 }
