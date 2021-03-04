@@ -5,7 +5,7 @@
 #include "app.h"
 #include <cassert>
 
-//a test
+//test methods
 int main() {
     BachelorCpp::Greeter greeter;
     assert(greeter.greeting().compare("Hello, World!") == 0);

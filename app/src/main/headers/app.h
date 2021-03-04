@@ -6,6 +6,7 @@
 
 #include <string>
 
+//name spaces for methods
 namespace BachelorCpp {
     class Greeter {
         public:

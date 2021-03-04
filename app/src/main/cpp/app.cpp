@@ -19,7 +19,7 @@ int main () {
     return 0;
 }
 
-
+//readfile method
 std::string BachelorCpp::Freader::readFile() {
     string line;
     ifstream myfile("adjlist");
