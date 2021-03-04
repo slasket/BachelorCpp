@@ -11,6 +11,11 @@ namespace BachelorCpp {
         public:
         std::string greeting();
     };
+    class Freader {
+    public:
+        std::string readFile();
+
+    };
 }
 
 #endif
