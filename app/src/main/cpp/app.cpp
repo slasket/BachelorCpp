@@ -12,7 +12,7 @@ using namespace std;
 std::string BachelorCpp::Greeter::greeting() {
     return std::string("Hello, World!");
 }
-
+//DO THE STUFF
 int main () {
     BachelorCpp::Greeter greeter;
     std::cout << greeter.greeting() << std::endl;
