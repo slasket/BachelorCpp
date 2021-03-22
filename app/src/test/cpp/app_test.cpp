@@ -4,12 +4,13 @@
 
 #include "app.h"
 #include <cassert>
+#include <iostream>
 
 //test methods
 int main() {
-
-    BachelorCpp::instFile reader;
-    assert(reader.rdFl("C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/adjlist") == 0);
+    BachelorCpp::createAdjList listMaker;
+    //assert(listMaker.createList("C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/adjlist", "file") == 0);
+    assert(listMaker.createList("C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/denmark", "file") == 0);
     return 0;
 
 }

@@ -9,7 +9,7 @@ using namespace std;
 
 class FileReader {
 public:
-    int readFile(string Path);
+    int readFile(string Path, string strt);
 };
 
 

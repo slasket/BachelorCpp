@@ -19,15 +19,12 @@ int main() {
 
 void adjacencyList::addEdge(std::vector<std::pair<int, int>> *adjlst, int source, int dest, int weigth) {
     adjlst[source].emplace_back(dest, weigth);
-
     //otherway
     //adj[dest].push_back(make_pair(source, weigth));
-
 }
 
 // Print adjacency list representaion ot graph
 //this has been yoinked
-
 void adjacencyList::printGraph(std::vector<std::pair<int, int>> *adj, int V) {
     int v, w;
     for (int u = 0; u < V; u++)

@@ -17,14 +17,15 @@ int main () {
     return 0;
 }
 
-//readfile method
-int BachelorCpp::instFile::rdFl(string path) {
-    //vector<pair<int, int>> *adjlst;
+
+int BachelorCpp::createAdjList::createList(std::string path, std::string method) {
+    //vector<pair<int, int>> adjlst[];
     //adjacencyList test;
     //test.addEdge(adjlst,1,2,15);
     //test.printGraph(adjlst,1);
-    FileReader reader;
-    return reader.readFile(std::move(path));
+    if(method == "file"){
+        FileReader reader;
+        reader.readFile(std::move(path), "adjlst");
+    }
+    return 0;
 }
-
-

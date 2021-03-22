@@ -14,7 +14,7 @@
 //"C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/adjlist"
 using namespace std;
 
-int FileReader::readFile(string path) {
+int FileReader::readFile(string path, string strt) {
     adjacencyList adjlst;
     string line;
     ifstream myfile(path);
@@ -29,25 +29,23 @@ int FileReader::readFile(string path) {
             istream_iterator<string> beg(buf), end;
             vector<string> lineAsTokens(beg, end);
 
-            //print the current line
-            cout << line << '\n';
-            int source;
-            int dest;
+            long long int source;
+            long long int dest;
             float weight;
-            for(auto const& value: lineAsTokens){
+            for(auto& value: lineAsTokens){
                 char firstChar = value[0];
                 if(firstChar == '#'){
-                    source = stoi(value.substr(1,value.size()-1));
+                    source = stoll(value.substr(1,value.size()-1));
                     //cout << source << '\n';
                 } else if (firstChar == ';'){
-                    dest = stoi(value.substr(1,value.size()-1));
+                    dest = stoll(value.substr(1,value.size()-1));
                     //cout << dest << '\n';
                 } else if (firstChar == ','){
-                    weight = stof(value.substr(1,value.size()-1));
+                    weight = stod(value.substr(1,value.size()-1));
                     cout << "adj pair: "<< source << "->" << dest << "," << weight << " \n";
                 }
-
-                //cout << value[0];
+                //cout << "outside of statements??" << "\n";
+                //cout << value;
             }
 
         }
