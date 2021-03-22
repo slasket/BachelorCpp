@@ -7,13 +7,9 @@
 
 //test methods
 int main() {
-    BachelorCpp::Greeter greeter;
-    assert(greeter.greeting().compare("Hello, World!") == 0);
 
-    BachelorCpp::Freader freader;
-    assert(freader.readFile().compare("0")==0);
-
-
+    BachelorCpp::instFile reader;
+    assert(reader.rdFl("C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/adjlist") == 0);
     return 0;
 
 }

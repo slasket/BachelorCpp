@@ -8,14 +8,9 @@
 
 //name spaces for methods
 namespace BachelorCpp {
-    class Greeter {
+    class instFile {
         public:
-        std::string greeting();
-    };
-    class Freader {
-    public:
-        std::string readFile();
-
+        int rdFl(std::string path);
     };
 }
 

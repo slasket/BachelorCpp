@@ -4,32 +4,27 @@
 
 #include <stdlib.h>
 #include "app.h"
+#include <adjacencyList.h>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <utility>
+#include <FileReader.h>
 
 using namespace std;
-std::string BachelorCpp::Greeter::greeting() {
-    return std::string("Hello, World!");
-}
 //DO THE STUFF
 int main () {
-    BachelorCpp::Greeter greeter;
-    std::cout << greeter.greeting() << std::endl;
     return 0;
 }
 
 //readfile method
-std::string BachelorCpp::Freader::readFile() {
-    string line;
-    ifstream myfile("adjlist");
-    if (myfile.is_open()) {
-        while (getline(myfile, line)) {
-            cout << line << '\n';
-        }
-        myfile.close();
-
-    } else cout << "problems happend\n";
-
-    return "0";
+int BachelorCpp::instFile::rdFl(string path) {
+    //vector<pair<int, int>> *adjlst;
+    //adjacencyList test;
+    //test.addEdge(adjlst,1,2,15);
+    //test.printGraph(adjlst,1);
+    FileReader reader;
+    return reader.readFile(std::move(path));
 }
+
+
