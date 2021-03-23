@@ -5,12 +5,16 @@
 #define APP_H
 
 #include <string>
+#include <utility>
+#include <vector>
 
 //name spaces for methods
 namespace BachelorCpp {
     class createAdjList {
     public:
         int createList(std::string path, std::string method);
+
+        int dummyVector();
     };
 }
 

@@ -19,13 +19,24 @@ int main () {
 
 
 int BachelorCpp::createAdjList::createList(std::string path, std::string method) {
-    //vector<pair<int, int>> adjlst[];
-    //adjacencyList test;
-    //test.addEdge(adjlst,1,2,15);
-    //test.printGraph(adjlst,1);
     if(method == "file"){
         FileReader reader;
         reader.readFile(std::move(path), "adjlst");
     }
+    return 0;
+}
+
+int BachelorCpp::createAdjList::dummyVector() {
+    vector<vector<pair<int, int>>> adjlst{};
+    cout << "stuff added";
+    adjacencyList test;
+    cout << "stuff added";
+    test.addEdge(adjlst,1,2,15);
+    cout << "stuff added";
+    test.addEdge(adjlst, 1, 4, 2);
+    cout << "stuff added";
+    test.addEdge(adjlst,2,1,1);
+    cout << "stuff added";
+    test.printGraph(adjlst);
     return 0;
 }

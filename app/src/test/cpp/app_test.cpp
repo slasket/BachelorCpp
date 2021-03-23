@@ -4,13 +4,33 @@
 
 #include "app.h"
 #include <cassert>
+#include "adjacencyList.h"
 #include <iostream>
+
+void testFileIntoAdjLst(){
+    BachelorCpp::createAdjList listMaker;
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file") == 0);
+    //assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file") == 0);
+
+}
+
+void testAdjListImplementation(){
+
+
+}
+
 
 //test methods
 int main() {
-    BachelorCpp::createAdjList listMaker;
-    //assert(listMaker.createList("C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/adjlist", "file") == 0);
-    assert(listMaker.createList("C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/denmark", "file") == 0);
-    return 0;
+    BachelorCpp::createAdjList adjListTester;
+    adjListTester.dummyVector();
+    //testFileIntoAdjLst();
 
+    return 0;
 }
+
+
+
+
+
+
