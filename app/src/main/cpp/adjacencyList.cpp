@@ -16,21 +16,32 @@ int main() {
 }
 
 
-void adjacencyList::addEdge(vector<vector<pair<int, int>>> &adjlst, int source, int dest, int weigth) {
-    adjlst[source].push_back(make_pair(dest, weigth));
-    //otherway
-    //adj[dest].push_back(make_pair(source, weigth));
+void adjacencyList::addEdge(vector<vector<pair<int, double>>> &adjlst, int source, int dest, double weigth) {
+    //cout << "sour " << source << " arrsize " << adjlst.size() << "\n";
+    if (adjlst.empty() || adjlst.size()-1 < source){
+        vector<pair<int,double>> secondVector{};
+        adjlst.resize(source+1,  secondVector);
+    }
+    if(adjlst.size() > source){
+        if (adjlst[source].empty()){
+            vector<pair<int,double>> secondVector{make_pair(dest,weigth)};
+            adjlst[source] = secondVector;
+            //cout << "first elem of vec is " << dest << "\n";
+        } else{
+            adjlst[source].push_back(make_pair(dest, weigth));
+            //cout << "new edge " << dest << "\n";
+        }
+    }
 }
 
 // Print adjacency list representaion ot graph
-//this has been yoinked
-void adjacencyList::printGraph(vector<vector<pair<int, int>>> &adjlst) {
-    cout << adjlst.size();
-    for (int s = 0; s < adjlst.size()-1; s++){
-        cout << "Node " << s << " makes an edge with \n";
+//this has partly been yoinked
+void adjacencyList::printGraph(vector<vector<pair<int, double>>> &adjlst) {
+    cout << "size of adjlist "<< adjlst.size() << "\n";
+    for (int s = 0; s < adjlst.size(); s++){
+        cout << "Node " << s << " -> \n";
         for (auto&  pair: adjlst[s]){
-            cout << "Node " << s << " -> " << pair.first << "weight: " << pair.second << "\n";
+            cout << " dest: " << pair.first << " weight: " << pair.second << "\n";
         }
-        cout << "\n";
     }
 }

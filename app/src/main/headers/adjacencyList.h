@@ -8,10 +8,10 @@
 using namespace std;
 class adjacencyList {
 public:
-    void addEdge(vector<vector<pair<int, int>>> &adjlst, int source, int dest, int weigth);
+    void addEdge(vector<vector<pair<int, double>>> &adjlst, int source, int dest, double weigth);
     //void addEdge(std::vector<int, int> *adjlst, int source, int dest, int weigth);
 
-    void printGraph(vector<vector<pair<int, int>>> &adjlst);
+    void printGraph(vector<vector<pair<int, double>>> &adjlst);
 };
 
 

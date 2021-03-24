@@ -12,7 +12,7 @@
 namespace BachelorCpp {
     class createAdjList {
     public:
-        int createList(std::string path, std::string method);
+        int createList(std::string path, std::string method, std::vector<std::vector<std::pair<int, double>>> &adjlst);
 
         int dummyVector();
     };

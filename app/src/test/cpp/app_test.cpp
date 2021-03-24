@@ -9,22 +9,29 @@
 
 void testFileIntoAdjLst(){
     BachelorCpp::createAdjList listMaker;
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file") == 0);
+    vector<vector<pair<int, double>>> adjlst{};
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file", adjlst) == 0);
     //assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file") == 0);
 
 }
 
 void testAdjListImplementation(){
-
+    BachelorCpp::createAdjList listMaker;
+    vector<vector<pair<int, double>>> adjlst{};
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlistWLongs", "file", adjlst) == 0);
+    adjacencyList test;
+    test.printGraph(adjlst);
 
 }
 
 
 //test methods
 int main() {
-    BachelorCpp::createAdjList adjListTester;
-    adjListTester.dummyVector();
+    //BachelorCpp::createAdjList adjListTester;
+    //adjListTester.dummyVector();
     //testFileIntoAdjLst();
+
+    testAdjListImplementation();
 
     return 0;
 }
