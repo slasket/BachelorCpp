@@ -7,32 +7,61 @@
 #include "adjacencyList.h"
 #include <iostream>
 
+
+
 void testFileIntoAdjLst(){
     BachelorCpp::createAdjList listMaker;
-    vector<vector<pair<int, double>>> adjlst{};
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file", adjlst) == 0);
-    //assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file") == 0);
+    adjListCollection adjCol;
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file", adjCol) == 0);
+
 
 }
 
-void testAdjListImplementation(){
+void testFileWLongs(){
     BachelorCpp::createAdjList listMaker;
-    vector<vector<pair<int, double>>> adjlst{};
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlistWLongs", "file", adjlst) == 0);
+    adjListCollection adjCol;
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlistWLongs", "file", adjCol) == 0);
     adjacencyList test;
-    test.printGraph(adjlst);
+    test.printGraph(adjCol);
+}
+
+void testFileDenmark(){
+    BachelorCpp::createAdjList listMaker;
+    adjListCollection adjCol;
+    //this takes the entirety of denmark and prints it :C
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file", adjCol) == 0);
+    //std::cout << "source node for rounding " << adjCol.intIdToLongID.find(6761)->second;
+    //std::cout << "first dest node " << adjCol.intIdToLongID.find(6762)->second; //dis = 45.865
+    //std::cout << "second node " << adjCol.intIdToLongID.find(6754)->second;  //dist = 6
+    //adjacencyList test;
+    //test.printGraph(adjCol);
 
 }
 
+void testMiniDenmarkValues(){
+    BachelorCpp::createAdjList listMaker;
+    adjListCollection adjCol;
+    listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/miniDenmark", "file", adjCol);
+    //correct distance for a node
+    assert(adjCol.adjlst[6761][1].second == 6.184578883958011);
+    //node 7256183438(translated into 6761 is connected to 3688196181)
+    assert(adjCol.intIdToLongID.find(adjCol.adjlst[6761][0].first)->second == 3688196181);
+}
+
+void testVectorImplementation(){
+    BachelorCpp::createAdjList listMaker;
+    adjListCollection adjCol;
+    listMaker.dummyVector(adjCol);
+}
 
 //test methods
 int main() {
-    //BachelorCpp::createAdjList adjListTester;
-    //adjListTester.dummyVector();
+
     //testFileIntoAdjLst();
-
-    testAdjListImplementation();
-
+    //testVectorImplementation();
+    //testFileWLongs();
+    //testFileDenmark();
+    testMiniDenmarkValues();
     return 0;
 }
 

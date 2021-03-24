@@ -6,12 +6,13 @@
 #define BACHELORCPP_FILEREADER_H
 #include <string>
 #include <vector>
+#include "adjacencyList.h"
 
 using namespace std;
 
 class FileReader {
 public:
-    int readFile(string Path, vector<vector<pair<int, double>>> &adjlst);
+    int readFile(string Path, adjListCollection &adjListCollection);
 };
 
 

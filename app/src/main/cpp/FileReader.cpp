@@ -15,30 +15,10 @@
 //"C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/adjlist"
 using namespace std;
 
-int idSoFar = 0;
-map<long long int, int> longIdToIntID;
-map<int, long long int> intIdToLongID;
 
 
-int insertInMaps(long long int id){
-    //if the key doesnt already exsist
-    int newId;
-    if(longIdToIntID.count(id) ==0){
 
-        longIdToIntID.insert(make_pair(id, idSoFar));
-
-        intIdToLongID.insert(make_pair(idSoFar,id));
-
-        newId = idSoFar;
-        idSoFar ++;
-    }else{
-        newId = longIdToIntID.find(id)->second;
-    }
-    return newId;
-}
-
-
-int FileReader::readFile(string path, vector<vector<pair<int, double>>> &adjlst) {
+int FileReader::readFile(string path, adjListCollection &adjListCollection) {
     adjacencyList listMutator;
 
     string line;
@@ -61,16 +41,16 @@ int FileReader::readFile(string path, vector<vector<pair<int, double>>> &adjlst)
                 char firstChar = value[0];
                 if(firstChar == '#'){
                     long long int sourceID = stoll(value.substr(1,value.size()-1));
-                    source = insertInMaps(sourceID);
+                    source = listMutator.insertInMaps(adjListCollection, sourceID);
                     //cout << source << '\n';
                 } else if (firstChar == ';'){
                     long long int destID = stoll(value.substr(1,value.size()-1));
-                    dest = insertInMaps(destID);
+                    dest = listMutator.insertInMaps(adjListCollection, destID);
                     //cout << dest << '\n';
                 } else if (firstChar == ','){
                     weight = stod(value.substr(1,value.size()-1));
                     //cout << "adj pair: "<< source << "->" << dest << "," << weight << " \n";
-                    listMutator.addEdge(adjlst,source, dest,weight);
+                    listMutator.addEdge(adjListCollection,source, dest,weight);
                 }
                 //cout << "outside of statements??" << "\n";
                 //cout << value;

@@ -18,27 +18,26 @@ int main () {
 }
 
 
-int BachelorCpp::createAdjList::createList(std::string path, std::string method, vector<vector<pair<int, double>>> &adjlst) {
+int BachelorCpp::createAdjList::createList(std::string path, std::string method, adjListCollection &adjListCollection) {
     if(method == "file"){
         FileReader reader;
-        reader.readFile(std::move(path), adjlst);
+        reader.readFile(std::move(path), adjListCollection);
     }
     return 0;
 }
 
-int BachelorCpp::createAdjList::dummyVector() {
-    vector<vector<pair<int, double>>> adjlst{};
+int BachelorCpp::createAdjList::dummyVector(adjListCollection &adjListCollection) {
     //cout << "stuff added";
     adjacencyList test;
     cout << "0 -> 1,2 \n";
-    test.addEdge(adjlst, 0,1,1);
+    test.addEdge(adjListCollection, 0,1,1);
     cout << "1 -> 2,15 \n";
-    test.addEdge(adjlst,1,2,15);
+    test.addEdge(adjListCollection,1,2,15);
     cout << "1 -> 4,2 \n";
-    test.addEdge(adjlst, 1, 4, 2);
+    test.addEdge(adjListCollection, 1, 4, 2);
     cout << "2 -> 1,1 \n";
-    test.addEdge(adjlst,2,1,1);
+    test.addEdge(adjListCollection,2,1,1);
     cout << "print my adj list \n";
-    test.printGraph(adjlst);
+    test.printGraph(adjListCollection);
     return 0;
 }

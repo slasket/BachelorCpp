@@ -7,14 +7,15 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "adjacencyList.h"
 
 //name spaces for methods
 namespace BachelorCpp {
     class createAdjList {
     public:
-        int createList(std::string path, std::string method, std::vector<std::vector<std::pair<int, double>>> &adjlst);
+        int createList(std::string path, std::string method, adjListCollection &adjListCollection);
 
-        int dummyVector();
+        int dummyVector(adjListCollection &adjListCollection);
     };
 }
 

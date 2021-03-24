@@ -16,19 +16,35 @@ int main() {
 }
 
 
-void adjacencyList::addEdge(vector<vector<pair<int, double>>> &adjlst, int source, int dest, double weigth) {
-    //cout << "sour " << source << " arrsize " << adjlst.size() << "\n";
-    if (adjlst.empty() || adjlst.size()-1 < source){
-        vector<pair<int,double>> secondVector{};
-        adjlst.resize(source+1,  secondVector);
+int adjacencyList::insertInMaps(adjListCollection &collection, long long int id){
+    //if the key doesnt already exsist
+    int newId;
+    if(collection.longIdToIntID.count(id) ==0){
+        collection.longIdToIntID.insert(make_pair(id, collection.idSoFar));
+        collection.intIdToLongID.insert(make_pair(collection.idSoFar,id));
+
+        newId = collection.idSoFar;
+        collection.idSoFar ++;
+    }else{
+        newId = collection.longIdToIntID.find(id)->second;
     }
-    if(adjlst.size() > source){
-        if (adjlst[source].empty()){
-            vector<pair<int,double>> secondVector{make_pair(dest,weigth)};
-            adjlst[source] = secondVector;
+    return newId;
+}
+
+
+void adjacencyList::addEdge(adjListCollection &collection, int source, int dest, double weight) {
+    //cout << "sour " << source << " arrsize " << collection.adjlst.size() << "\n";
+    if (collection.adjlst.empty() || collection.adjlst.size()-1 < source){
+        vector<pair<int,double>> secondVector{};
+        collection.adjlst.resize(source+1,  secondVector);
+    }
+    if(collection.adjlst.size() > source){
+        if (collection.adjlst[source].empty()){
+            vector<pair<int,double>> secondVector{make_pair(dest,weight)};
+            collection.adjlst[source] = secondVector;
             //cout << "first elem of vec is " << dest << "\n";
         } else{
-            adjlst[source].push_back(make_pair(dest, weigth));
+            collection.adjlst[source].push_back(make_pair(dest, weight));
             //cout << "new edge " << dest << "\n";
         }
     }
@@ -36,11 +52,11 @@ void adjacencyList::addEdge(vector<vector<pair<int, double>>> &adjlst, int sourc
 
 // Print adjacency list representaion ot graph
 //this has partly been yoinked
-void adjacencyList::printGraph(vector<vector<pair<int, double>>> &adjlst) {
-    cout << "size of adjlist "<< adjlst.size() << "\n";
-    for (int s = 0; s < adjlst.size(); s++){
+void adjacencyList::printGraph(adjListCollection &collection) {
+    cout << "size of adjlist "<< collection.adjlst.size() << "\n";
+    for (int s = 0; s < collection.adjlst.size(); s++){
         cout << "Node " << s << " -> \n";
-        for (auto&  pair: adjlst[s]){
+        for (auto&  pair: collection.adjlst[s]){
             cout << " dest: " << pair.first << " weight: " << pair.second << "\n";
         }
     }
