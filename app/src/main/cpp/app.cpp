@@ -10,20 +10,52 @@
 #include <string>
 #include <utility>
 #include <FileReader.h>
+#include <sstream>
+#include <chrono>
 
 using namespace std;
 //DO THE STUFF
 int main () {
+    cout << "Please";
     return 0;
 }
 
 
-int BachelorCpp::createAdjList::createList(std::string path, std::string method, adjListCollection &adjListCollection) {
-    if(method == "file"){
+int BachelorCpp::createAdjList::createList(string path, string method, adjListCollection &adjListCollection) {
+    if (method == "file") {
         FileReader reader;
         reader.readFile(std::move(path), adjListCollection);
-    }
-    return 0;
+    } else if (method == "java") {
+        string line;
+        while (getline(cin, line)) {
+            adjacencyList listMutator;
+            istringstream buf(line);
+            istream_iterator<string> beg(buf), end;
+            vector<string> lineAsTokens(beg, end);
+
+            int source;
+            int dest;
+            double weight;
+            for (auto &value: lineAsTokens) {
+                char firstChar = value[0];
+                if (firstChar == '#') {
+                    long long int sourceID = stoll(value.substr(1, value.size() - 1));
+                    source = listMutator.insertInMaps(adjListCollection, sourceID);
+                } else if (firstChar == ';') {
+                    long long int destID = stoll(value.substr(1, value.size() - 1));
+                    dest = listMutator.insertInMaps(adjListCollection, destID);
+                } else if (firstChar == ',') {
+                    weight = stod(value.substr(1, value.size() - 1));
+                    listMutator.addEdge(adjListCollection, source, dest, weight);
+                } else if (firstChar == '!'){
+                    cout << "Finishes making adjencency list in cpp" << endl;
+                    break;
+                }
+
+                }
+            }
+        }
+        return 0;
 }
 
 int BachelorCpp::createAdjList::dummyVector(adjListCollection &adjListCollection) {
