@@ -9,12 +9,15 @@
 
 using namespace std;
 
+enum shortestPathMethods{
+    djikstra = 0,
+    astar = 1
+};
 
 void testFileIntoAdjLst() {
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file", adjCol) ==
-           0);
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file", adjCol) == 0);
 
 
 }
@@ -28,12 +31,11 @@ void testFileWLongs() {
     test.printGraph(adjCol);
 }
 
-void testFileDenmark() {
+void testFileDenmark(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
     //this takes the entirety of denmark and prints it :C
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file", adjCol) ==
-           0);
+    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file", adjCol) == 0);
     //std::cout << "source node for rounding " << adjCol.intIdToLongID.find(6761)->second;
     //std::cout << "first dest node " << adjCol.intIdToLongID.find(6762)->second; //dis = 45.865
     //std::cout << "second node " << adjCol.intIdToLongID.find(6754)->second;  //dist = 6
@@ -42,10 +44,10 @@ void testFileDenmark() {
 
 }
 
-void testMiniDenmarkValues() {
+void testMiniDenmarkValues(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
-    listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/miniDenmark", "file", adjCol);
+    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/miniDenmark", "file", adjCol);
     //correct distance for a node
     assert(adjCol.adjlst[6761][1].second == 6.184578883958011);
     //node 7256183438(translated into 6761 is connected to 3688196181)
@@ -57,6 +59,46 @@ void testVectorImplementation() {
     adjListCollection adjCol;
     listMaker.dummyVector(adjCol);
 }
+
+
+void testMalta(){
+    BachelorCpp::createAdjList listMaker;
+    adjListCollection adjCol;
+    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/malta", "file", adjCol);
+    //Cool asserstions
+    //cout << "idsofar: " << adjCol.idSoFar;
+    //cout << "size of map: " << adjCol.intIdToLongID.size();
+    //assert(adjCol.adjlst[6761][1].second == 6.184578883958011);
+    BachelorCpp::shortestPathAlgo shortestPath;
+    int from = adjCol.longIdToIntID.find(146885871)->second;
+    int to = adjCol.longIdToIntID.find(1498913919)-> second;
+    shortestPath.shortestPath(djikstra, from ,to,adjCol);
+    cout << "testing across malta \n" ;
+    //int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
+    //int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
+    //shortestPath.testSSP(djikstra,maltaNorth,maltaSouth,adjCol);
+}
+
+void testDjikstraToyExample(){
+    BachelorCpp::createAdjList listMaker;
+
+    adjListCollection adjCol;
+    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/djikstraTest","file",adjCol);
+    BachelorCpp::shortestPathAlgo shortestPath;
+    vector<int> path = shortestPath.shortestPath(djikstra,0,1,adjCol);
+    adjacencyList listConveter;
+    vector<long long int> idvec = listConveter.spVectorToLongId(adjCol, path);
+
+    //testing a->b gives path a,e,b with distance 4
+    assert(idvec[0] == 0);
+    assert(idvec[1] == 4);
+    assert(idvec[2] == 1);
+
+    //shortestPath.shortestPath(djikstra,0,2,adjCol);
+    //shortestPath.shortestPath(djikstra,0,3,adjCol);
+    //shortestPath.shortestPath(djikstra,0,4,adjCol);
+}
+
 
 void doTestStuff() {
     BachelorCpp::createAdjList listMaker;
@@ -74,8 +116,11 @@ int main() {
     //testVectorImplementation();
     //testFileWLongs();
     //testFileDenmark();
-    doTestStuff();
+    //doTestStuff();
     //testMiniDenmarkValues();
+    //testMiniDenmarkValues();
+    //testMalta();
+    testDjikstraToyExample();
     return 0;
 }
 

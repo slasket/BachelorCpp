@@ -15,7 +15,6 @@ int main() {
 
 }
 
-
 int adjacencyList::insertInMaps(adjListCollection &collection, long long int id){
     //if the key doesnt already exsist
     int newId;
@@ -60,4 +59,13 @@ void adjacencyList::printGraph(adjListCollection &collection) {
             cout << " dest: " << pair.first << " weight: " << pair.second << "\n";
         }
     }
+}
+
+vector<long long int> adjacencyList::spVectorToLongId(adjListCollection &collection, vector<int> spList) {
+    vector<long long int> vectorWLongs;
+    for(auto id: spList){
+        long long int newid = collection.intIdToLongID.find(id)->second;
+        vectorWLongs.push_back(newid);
+    }
+    return vectorWLongs;
 }

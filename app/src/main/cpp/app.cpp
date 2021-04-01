@@ -12,11 +12,11 @@
 #include <FileReader.h>
 #include <sstream>
 #include <chrono>
+#include "djikstra.h"
 
 using namespace std;
 //DO THE STUFF
 int main () {
-    cout << "Please";
     return 0;
 }
 
@@ -72,4 +72,17 @@ int BachelorCpp::createAdjList::dummyVector(adjListCollection &adjListCollection
     cout << "print my adj list \n";
     test.printGraph(adjListCollection);
     return 0;
+}
+
+vector<int> BachelorCpp::shortestPathAlgo::shortestPath(int method, int source, int dest, adjListCollection &adjListCollection) {
+    //djikstra=0,astar=1 ect
+    switch (method) {
+        case 0:
+            djikstra sspClass;
+            return sspClass.djikstraShortestPath(source,dest,adjListCollection);
+        case 1:
+            cout << "Not yet Implemented";
+        default:
+            cout << "case Unknown";
+    }
 }

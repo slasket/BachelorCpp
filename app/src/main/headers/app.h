@@ -8,6 +8,7 @@
 #include <utility>
 #include <vector>
 #include "adjacencyList.h"
+#include "djikstra.h"
 
 //name spaces for methods
 namespace BachelorCpp {
@@ -16,6 +17,10 @@ namespace BachelorCpp {
         int createList(std::string path, std::string method, adjListCollection &adjListCollection);
 
         int dummyVector(adjListCollection &adjListCollection);
+    };
+    class shortestPathAlgo{
+    public:
+        vector<int> shortestPath(int method, int source, int dest, adjListCollection &adjListCollection);
     };
 }
 

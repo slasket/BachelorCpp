@@ -22,7 +22,10 @@ public:
     void printGraph(adjListCollection &collection);
 
     int insertInMaps(adjListCollection &collection, long long int id);
+    std::vector<long long int> spVectorToLongId(adjListCollection &collection, std::vector<int> spList);
 };
+
+
 
 
 #endif //BACHELORCPP_ADJACENCYLIST_H

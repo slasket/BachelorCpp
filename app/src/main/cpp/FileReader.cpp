@@ -15,9 +15,6 @@
 //"C:/Users/abg/CLionProjects/BachelorCpp/app/src/main/cpp/adjlist"
 using namespace std;
 
-
-
-
 int FileReader::readFile(string path, adjListCollection &adjListCollection) {
     adjacencyList listMutator;
 
