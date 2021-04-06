@@ -6,7 +6,7 @@
 #include <cassert>
 #include "adjacencyList.h"
 #include <iostream>
-
+#include <tuple>
 using namespace std;
 
 enum shortestPathMethods{
@@ -64,19 +64,34 @@ void testVectorImplementation() {
 void testMalta(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
+    adjacencyList listConveter;
     listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/malta", "file", adjCol);
-    //Cool asserstions
-    //cout << "idsofar: " << adjCol.idSoFar;
-    //cout << "size of map: " << adjCol.intIdToLongID.size();
-    //assert(adjCol.adjlst[6761][1].second == 6.184578883958011);
+
+    //short area in malta
     BachelorCpp::shortestPathAlgo shortestPath;
     int from = adjCol.longIdToIntID.find(146885871)->second;
     int to = adjCol.longIdToIntID.find(1498913919)-> second;
-    shortestPath.shortestPath(djikstra, from ,to,adjCol);
-    cout << "testing across malta \n" ;
-    //int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
-    //int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
-    //shortestPath.testSSP(djikstra,maltaNorth,maltaSouth,adjCol);
+
+    tuple<double,vector<int>> result;
+    vector<long long int> idvec;
+    result = shortestPath.shortestPath(djikstra, from ,to,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    cout << "testing short distance in malta \n" ;
+    cout << "from node: 146885871, to node: 1498913919 \n";
+    cout << "distance: " << get<0>(result) << "\n";
+    cout << "path: ";
+    shortestPath.printVec(idvec);
+    cout << "\n";
+
+    int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
+    int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
+    result = shortestPath.shortestPath(djikstra,maltaNorth,maltaSouth,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    cout << "testing long distance in malta \n" ;
+    cout << "from node: 3593516725, to node: 5037683804 \n";
+    cout << "distance: " << get<0>(result) << "\n";
+    cout << "path: ";
+    shortestPath.printVec(idvec);
 }
 
 void testDjikstraToyExample(){
@@ -85,18 +100,47 @@ void testDjikstraToyExample(){
     adjListCollection adjCol;
     listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/djikstraTest","file",adjCol);
     BachelorCpp::shortestPathAlgo shortestPath;
-    vector<int> path = shortestPath.shortestPath(djikstra,0,1,adjCol);
+    //testing that all the nodes in the toy graph has the smallest path
+    enum toyExampleVals{
+        //translation table to values after putting the
+        aNode = 0,
+        bNode = 1,
+        cNode = 3,
+        dNode = 4,
+        eNode = 2
+    };
+    tuple<double,vector<int>> result;
+    vector<long long int> idvec;
+    result = shortestPath.shortestPath(djikstra,aNode,bNode,adjCol);
     adjacencyList listConveter;
-    vector<long long int> idvec = listConveter.spVectorToLongId(adjCol, path);
-
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     //testing a->b gives path a,e,b with distance 4
     assert(idvec[0] == 0);
     assert(idvec[1] == 4);
     assert(idvec[2] == 1);
+    assert(get<0>(result) == 4);
 
-    //shortestPath.shortestPath(djikstra,0,2,adjCol);
-    //shortestPath.shortestPath(djikstra,0,3,adjCol);
-    //shortestPath.shortestPath(djikstra,0,4,adjCol);
+    result = shortestPath.shortestPath(djikstra,aNode,eNode,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    assert(idvec[0]==0);
+    assert(idvec[1]==4);
+    assert(get<0>(result) == 3);
+
+    result = shortestPath.shortestPath(djikstra,aNode,cNode,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    assert(idvec[0]==0);
+    assert(idvec[1]==4);
+    assert(idvec[2]==1);
+    assert(idvec[3]==2);
+    assert(get<0>(result) == 6);
+
+
+    result = shortestPath.shortestPath(djikstra,aNode,dNode,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    assert(idvec[0]==0);
+    assert(idvec[1]==4);
+    assert(idvec[2]==3);
+    assert(get<0>(result) == 5);
 }
 
 
@@ -104,7 +148,6 @@ void doTestStuff() {
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
     listMaker.createList("", "java", adjCol);
-
 
 }
 
@@ -119,8 +162,8 @@ int main() {
     //doTestStuff();
     //testMiniDenmarkValues();
     //testMiniDenmarkValues();
-    //testMalta();
-    testDjikstraToyExample();
+    testMalta();
+    //testDjikstraToyExample();
     return 0;
 }
 

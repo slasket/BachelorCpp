@@ -7,6 +7,7 @@
 #include <vector>
 #include <queue>
 #include <string>
+#include <tuple>
 
 using namespace std;
 
@@ -73,7 +74,7 @@ vector<int> createSPList(vector<int> prevNode, int source, int destination){
 }
 
 
-vector<int> djikstra::djikstraShortestPath(int source, int dest, adjListCollection &adjListCollection) {
+tuple<double, vector<int>> djikstra::djikstraShortestPath(int source, int dest, adjListCollection &adjListCollection) {
     const double INF = 999999999999;
     int sizeOfGraph = adjListCollection.intIdToLongID.size();
 
@@ -122,7 +123,7 @@ vector<int> djikstra::djikstraShortestPath(int source, int dest, adjListCollecti
         nodeSeen[headId] = true;
     }
     vector<int> path = createSPList(prevNode,source,dest);
-    return path;
+    return make_tuple(distance[dest],path);
 }
 
 
