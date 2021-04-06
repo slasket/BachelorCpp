@@ -27,7 +27,9 @@ int BachelorCpp::createAdjList::createList(string path, string method, adjListCo
         reader.readFile(std::move(path), adjListCollection);
     } else if (method == "java") {
         string line;
-        while (getline(cin, line)) {
+        bool reading = true;
+        while (reading) {
+            getline(cin, line);
             adjacencyList listMutator;
             istringstream buf(line);
             istream_iterator<string> beg(buf), end;
@@ -48,10 +50,9 @@ int BachelorCpp::createAdjList::createList(string path, string method, adjListCo
                     weight = stod(value.substr(1, value.size() - 1));
                     listMutator.addEdge(adjListCollection, source, dest, weight);
                 } else if (firstChar == '!'){
-                    cout << "Finishes making adjencency list in cpp" << endl;
-                    break;
+                    cout << "Finished making adjencency list in cpp" << endl;
+                    reading = false;
                 }
-
                 }
             }
         }

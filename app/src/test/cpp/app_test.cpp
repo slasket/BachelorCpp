@@ -14,6 +14,11 @@ enum shortestPathMethods{
     astar = 1
 };
 
+enum commands{
+    makeAdjecencyList,
+    runDijkstra
+};
+
 void testFileIntoAdjLst() {
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
@@ -99,11 +104,33 @@ void testDjikstraToyExample(){
     //shortestPath.shortestPath(djikstra,0,4,adjCol);
 }
 
-
-void doTestStuff() {
-    BachelorCpp::createAdjList listMaker;
-    adjListCollection adjCol;
-    listMaker.createList("", "java", adjCol);
+void communicateWithJava() {
+    map<string, commands> mapStringToEnum =
+            {
+                    {"makeAdjecencyList", makeAdjecencyList},
+                    {"runDijkstra", runDijkstra}
+            };
+    string line;
+    while(getline(cin, line)) {
+        commands switchType = mapStringToEnum[line];
+        switch (switchType) {
+            case makeAdjecencyList: {
+                BachelorCpp::createAdjList listMaker;
+                adjListCollection adjCol;
+                listMaker.createList("", "java", adjCol);
+                break;
+            }
+            case runDijkstra: {
+                //do stuff
+                cout << "Test" << endl;
+                break;
+            }
+        }
+    }
+    cout << "OutOfLoop error" << endl;
+    //BachelorCpp::createAdjList listMaker;
+    //adjListCollection adjCol;
+    //listMaker.createList("", "java", adjCol);
 
 
 }
@@ -116,11 +143,11 @@ int main() {
     //testVectorImplementation();
     //testFileWLongs();
     //testFileDenmark();
-    //doTestStuff();
+    communicateWithJava();
     //testMiniDenmarkValues();
     //testMiniDenmarkValues();
     //testMalta();
-    testDjikstraToyExample();
+    //testDjikstraToyExample();
     return 0;
 }
 

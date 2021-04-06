@@ -100,7 +100,7 @@ vector<int> djikstra::djikstraShortestPath(int source, int dest, adjListCollecti
 
         //Have we reached destination check
         if (head.first==dest){
-            //we have arrived at destination and were done
+            //we have arrived at destination and we are done
             //cout << "we have hit destination \n";
             break;
         }
