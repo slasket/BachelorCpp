@@ -82,17 +82,6 @@ void testMaltaSmall(){
     cout << "distance: " << get<0>(result) << "\n";
     cout << "path: ";
     shortestPath.printVec(idvec);
-    cout << "\n";
-
-    int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
-    int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
-    result = shortestPath.shortestPath(djikstra,maltaNorth,maltaSouth,adjCol);
-    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
-    cout << "testing long distance in malta \n" ;
-    cout << "from node: 3593516725, to node: 5037683804 \n";
-    cout << "distance: " << get<0>(result) << "\n";
-    cout << "path: ";
-    shortestPath.printVec(idvec);
 }
 
 void testMaltaLarge(){
