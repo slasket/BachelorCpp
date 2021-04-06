@@ -17,8 +17,6 @@ int main() {
 
 }
 
-
-
 //this comparator ensures that the top most element of a queue has the lowest weight
 struct comparator{
     constexpr bool operator()(
@@ -54,12 +52,6 @@ void printRoute(vector<int> const &prevPath, int source, int dest){
     cout << dest << " ";
 }
 
-void print(std::vector<int> const &input)
-{
-    for (int i = 0; i < input.size(); i++) {
-        std::cout << input.at(i) << ' ';
-    }
-}
 
 vector<int> createSPList(vector<int> prevNode, int source, int destination){
     int temdest = destination;
@@ -125,11 +117,3 @@ tuple<double, vector<int>> djikstra::djikstraShortestPath(int source, int dest, 
     vector<int> path = createSPList(prevNode,source,dest);
     return make_tuple(distance[dest],path);
 }
-
-
-//cout << "\n";
-//    cout << "path from source: " << source << " to: " << dest <<" with distance: " << distance[dest] << "\n";
-//    cout << "route [ " ;
-//    toyExampleConverter(prevNode, source , dest);
-//    cout << "] \n";
-

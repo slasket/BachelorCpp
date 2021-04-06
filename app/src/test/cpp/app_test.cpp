@@ -22,16 +22,16 @@ enum commands{
 void testFileIntoAdjLst() {
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file", adjCol) == 0);
-
-
+    listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlist", "file", adjCol);
+    adjacencyList test;
+    test.printGraph(adjCol);
 }
 
 void testFileWLongs() {
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlistWLongs", "file",
-                                adjCol) == 0);
+    listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/adjlistWLongs", "file",
+                                adjCol);
     adjacencyList test;
     test.printGraph(adjCol);
 }
@@ -40,12 +40,8 @@ void testFileDenmark(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
     //this takes the entirety of denmark and prints it :C
-    assert(listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file", adjCol) == 0);
-    //std::cout << "source node for rounding " << adjCol.intIdToLongID.find(6761)->second;
-    //std::cout << "first dest node " << adjCol.intIdToLongID.find(6762)->second; //dis = 45.865
-    //std::cout << "second node " << adjCol.intIdToLongID.find(6754)->second;  //dist = 6
-    //adjacencyList test;
-    //test.printGraph(adjCol);
+    listMaker.createList("C:/Users/aske-/CLionProjects/BachelorCpp/app/src/resources/denmark", "file", adjCol);
+    //insert tests from a -> b in denmark
 
 }
 
@@ -66,7 +62,7 @@ void testVectorImplementation() {
 }
 
 
-void testMalta(){
+void testMaltaSmall(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
     adjacencyList listConveter;
@@ -87,6 +83,29 @@ void testMalta(){
     cout << "path: ";
     shortestPath.printVec(idvec);
     cout << "\n";
+
+    int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
+    int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
+    result = shortestPath.shortestPath(djikstra,maltaNorth,maltaSouth,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    cout << "testing long distance in malta \n" ;
+    cout << "from node: 3593516725, to node: 5037683804 \n";
+    cout << "distance: " << get<0>(result) << "\n";
+    cout << "path: ";
+    shortestPath.printVec(idvec);
+}
+
+void testMaltaLarge(){
+    BachelorCpp::createAdjList listMaker;
+    adjListCollection adjCol;
+    adjacencyList listConveter;
+    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/malta", "file", adjCol);
+
+    //short area in malta
+    BachelorCpp::shortestPathAlgo shortestPath;
+
+    tuple<double,vector<int>> result;
+    vector<long long int> idvec;
 
     int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
     int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
@@ -190,7 +209,8 @@ int main() {
     //communicateWithJava();
     //testMiniDenmarkValues();
     //testMiniDenmarkValues();
-    //testMalta();
+    testMaltaSmall();
+    testMaltaLarge();
     testDjikstraToyExample();
     return 0;
 }
