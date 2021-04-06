@@ -9,6 +9,7 @@
 #include <vector>
 #include "adjacencyList.h"
 #include "djikstra.h"
+#include <tuple>
 
 //name spaces for methods
 namespace BachelorCpp {
@@ -20,7 +21,8 @@ namespace BachelorCpp {
     };
     class shortestPathAlgo{
     public:
-        vector<int> shortestPath(int method, int source, int dest, adjListCollection &adjListCollection);
+        tuple<double, vector<int>> shortestPath(int method, int source, int dest, adjListCollection &adjListCollection);
+        void printVec(vector<long long int>const &input);
     };
 }
 

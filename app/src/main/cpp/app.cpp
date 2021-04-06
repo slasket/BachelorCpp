@@ -75,7 +75,7 @@ int BachelorCpp::createAdjList::dummyVector(adjListCollection &adjListCollection
     return 0;
 }
 
-vector<int> BachelorCpp::shortestPathAlgo::shortestPath(int method, int source, int dest, adjListCollection &adjListCollection) {
+tuple<double, vector<int>> BachelorCpp::shortestPathAlgo::shortestPath(int method, int source, int dest, adjListCollection &adjListCollection) {
     //djikstra=0,astar=1 ect
     switch (method) {
         case 0:
@@ -86,4 +86,12 @@ vector<int> BachelorCpp::shortestPathAlgo::shortestPath(int method, int source, 
         default:
             cout << "case Unknown";
     }
+}
+
+void BachelorCpp::shortestPathAlgo::printVec(vector<long long int> const &input) {
+        cout << "[";
+        for (long long i : input) {
+            cout << i << ' ';
+        }
+        cout << "]";
 }

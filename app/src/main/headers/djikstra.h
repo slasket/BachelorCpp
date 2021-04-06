@@ -7,13 +7,14 @@
 #include<iostream>
 #include<vector>
 #include<set>
+#include<tuple>
 #include "adjacencyList.h"
 
 
 using namespace std;
 class djikstra {
 public:
-    vector<int> djikstraShortestPath(int source, int dest, adjListCollection &adjListCollection);
+    tuple<double, vector<int>> djikstraShortestPath(int source, int dest, adjListCollection &adjListCollection);
 };
 
 
