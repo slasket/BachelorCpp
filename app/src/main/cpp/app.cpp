@@ -12,6 +12,7 @@
 #include <FileReader.h>
 #include <sstream>
 #include <chrono>
+#include <aStar.h>
 #include "dijkstra.h"
 
 using namespace std;
@@ -79,10 +80,11 @@ tuple<double, vector<int>> BachelorCpp::shortestPathAlgo::shortestPath(int metho
     //dijkstra=0,astar=1 ect
     switch (method) {
         case 0:
-            dijkstra sspClass;
-            return sspClass.djikstraShortestPath(source,dest,adjListCollection);
+            dijkstra dijkstra;
+            return dijkstra.djikstraShortestPath(source,dest,adjListCollection);
         case 1:
-            cout << "Not yet Implemented";
+            aStar aStar;
+            return aStar.aStarShortestPath(source,dest,adjListCollection);
         default:
             cout << "case Unknown";
     }

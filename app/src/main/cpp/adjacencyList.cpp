@@ -73,3 +73,11 @@ vector<long long int> adjacencyList::spVectorToLongId(adjListCollection &collect
 void adjacencyList::addEucildDist(adjListCollection &collection, int source, double euclidDist) {
     collection.euclidDistance.insert(make_pair(source,euclidDist));
 }
+
+int adjacencyList::getIntID(adjListCollection &collection, long long int value) {
+    return collection.longIdToIntID.find(value)->second;
+}
+
+long long int adjacencyList::getLongID(adjListCollection &collection, int value) {
+    return collection.intIdToLongID.find(value)->second;
+}
