@@ -172,9 +172,9 @@ void testAStarToyExample(){
     //test that the euclidDist has been written correct
     assert(adjCol.euclidDistance.find(aNode)->second == 5.0);
     assert(adjCol.euclidDistance.find(bNode)->second == 9.0);
-    assert(adjCol.euclidDistance.find(cNode)->second == 4.0);
-    assert(adjCol.euclidDistance.find(dNode)->second == 0.0);
-    assert(adjCol.euclidDistance.find(eNode)->second == 3.0);
+    assert(adjCol.euclidDistance.find(cNode)->second == 0.0);
+    assert(adjCol.euclidDistance.find(dNode)->second == 3.0);
+    assert(adjCol.euclidDistance.find(eNode)->second == 4.0);
 
     BachelorCpp::shortestPathAlgo shortestPath;
     tuple<double,vector<int>> result; vector<long long int> idvec;
@@ -182,7 +182,13 @@ void testAStarToyExample(){
     result = shortestPath.shortestPath(astar,aNode,cNode,adjCol);
     adjacencyList listConveter;
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
-    shortestPath.printVec(idvec);
+
+    assert(idvec[0]==0);
+    assert(idvec[1]==4);
+    assert(idvec[2]==2);
+    assert(get<0>(result) == 11);
+
+    //shortestPath.printVec(idvec);
 }
 
 void aStarMaltaSmall(){
@@ -249,10 +255,10 @@ int main() {
     //communicateWithJava();
     //testMiniDenmarkValues();
     //testMiniDenmarkValues();
-    testDijkstraMaltaSmall();
+    //testDijkstraMaltaSmall();
     //testDijkstraMaltaLarge();
     //testDijkstraToyExample();
-    //testAStarToyExample();
+    testAStarToyExample();
 
     //aStarMaltaSmall();
     return 0;
