@@ -22,7 +22,7 @@ namespace BachelorCpp {
     class shortestPathAlgo{
     public:
         tuple<double, vector<int>> shortestPath(int method, int source, int dest, adjListCollection &adjListCollection);
-        void printVec(vector<long long int>const &input);
+        static void printVec(vector<long long int>const &input);
     };
 }
 

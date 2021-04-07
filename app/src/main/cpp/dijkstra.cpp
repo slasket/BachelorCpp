@@ -56,7 +56,7 @@ void printRoute(vector<int> const &prevPath, int source, int dest){
 vector<int> createSPList(vector<int> prevNode, int source, int destination){
     int temdest = destination;
     vector<int> shortestPath;
-    while (temdest != source){
+    while (temdest != source && temdest > 0){
         shortestPath.push_back(temdest);
         temdest = prevNode[temdest];
     }
@@ -69,7 +69,6 @@ vector<int> createSPList(vector<int> prevNode, int source, int destination){
 tuple<double, vector<int>> dijkstra::djikstraShortestPath(int source, int dest, adjListCollection &adjListCollection) {
     const double INF = 999999999999;
     int sizeOfGraph = adjListCollection.intIdToLongID.size();
-
     //initilaize distance from source to everything to infinity
     //distance from source to source to 0
     vector<double> distance(sizeOfGraph,INF);
@@ -84,7 +83,6 @@ tuple<double, vector<int>> dijkstra::djikstraShortestPath(int source, int dest, 
     //heap of nodes to evaluate
     priority_queue<pair<int,double>, vector<pair<int,double>>, comparator> minHeap;
     minHeap.push(make_pair(source,0.0));
-
     while (!minHeap.empty()){
         //pop the top element
         pair<int,double> head = minHeap.top();
@@ -114,6 +112,8 @@ tuple<double, vector<int>> dijkstra::djikstraShortestPath(int source, int dest, 
         //mark head as it has been seen and cant be considered again
         nodeSeen[headId] = true;
     }
+
     vector<int> path = createSPList(prevNode,source,dest);
+
     return make_tuple(distance[dest],path);
 }

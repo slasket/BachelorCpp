@@ -49,14 +49,14 @@ int BachelorCpp::createAdjList::createList(string path, string method, adjListCo
                 } else if (firstChar == ',') {
                     weight = stod(value.substr(1, value.size() - 1));
                     listMutator.addEdge(adjListCollection, source, dest, weight);
-                } else if (firstChar == '!'){
+                } else if (firstChar == '!') {
                     cout << "Finished making adjencency list in cpp" << endl;
                     reading = false;
-                }
                 }
             }
         }
         return 0;
+    }
 }
 
 int BachelorCpp::createAdjList::dummyVector(adjListCollection &adjListCollection) {

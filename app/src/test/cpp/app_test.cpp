@@ -183,18 +183,32 @@ void communicateWithJava() {
                     {"runDijkstra", runDijkstra}
             };
     string line;
+    adjListCollection adjCol;
     while(getline(cin, line)) {
         commands switchType = mapStringToEnum[line];
+        adjacencyList listConveter;
+        BachelorCpp::createAdjList listMaker;
         switch (switchType) {
             case makeAdjecencyList: {
-                BachelorCpp::createAdjList listMaker;
-                adjListCollection adjCol;
                 listMaker.createList("", "java", adjCol);
                 break;
             }
             case runDijkstra: {
-                //do stuff
-                cout << "Test" << endl;
+                string nodeIdFrom;
+                string nodeIdTo;
+                cin >> nodeIdFrom;
+                cin >> nodeIdTo;
+                int from = adjCol.longIdToIntID[stoll(nodeIdFrom)];
+                int to = adjCol.longIdToIntID[stoll(nodeIdTo)];
+                BachelorCpp::shortestPathAlgo shortestPath;
+                tuple<double,vector<int>> result = shortestPath.shortestPath(dijkstra, from, to, adjCol);
+                vector<long long int> idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+                string listOfNodes;
+                for(long long int nodeId: idvec) {
+                    listOfNodes += " " + to_string(nodeId);
+                }
+                double distance = get<0>(result);
+                cout << listOfNodes << endl;
                 break;
             }
         }
@@ -206,7 +220,23 @@ void communicateWithJava() {
 
 
 }
+void testDijkstraAdjlist(){
+    BachelorCpp::createAdjList listMaker;
 
+    adjListCollection adjCol;
+    adjacencyList listConveter;
+
+    listMaker.createList("C:/proj/BachelorCpp/app/src/resources/adjlist","file",adjCol);
+    BachelorCpp::shortestPathAlgo shortestPath;
+
+    tuple<double,vector<int>> result; vector<long long int> idvec;
+    int start = adjCol.longIdToIntID[1];
+    int end = adjCol.longIdToIntID[5];
+
+    result = shortestPath.shortestPath(dijkstra,start,end,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol,get<1>(result));
+    shortestPath.printVec(idvec);
+}
 
 //test methods
 int main() {
@@ -215,13 +245,14 @@ int main() {
     //testVectorImplementation();
     //testFileWLongs();
     //testFileDenmark();
-    //communicateWithJava();
+    //testDijkstraAdjlist();
+    communicateWithJava();
     //testMiniDenmarkValues();
     //testMiniDenmarkValues();
-    testMaltaSmall();
-    testMaltaLarge();
-    testDijkstraToyExample();
-    testAStarMapIsFilled();
+    //testMaltaSmall();
+    //testMaltaLarge();
+    //testDijkstraToyExample();
+    //testAStarMapIsFilled();
     return 0;
 }
 

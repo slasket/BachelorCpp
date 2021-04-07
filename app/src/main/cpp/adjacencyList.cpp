@@ -52,11 +52,11 @@ void adjacencyList::addEdge(adjListCollection &collection, int source, int dest,
 // Print adjacency list representaion ot graph
 //this has partly been yoinked
 void adjacencyList::printGraph(adjListCollection &collection) {
-    cout << "size of adjlist "<< collection.adjlst.size() << "\n";
+    cout << "size of adjlist "<< collection.adjlst.size() << endl;
     for (int s = 0; s < collection.adjlst.size(); s++){
-        cout << "Node " << s << " -> \n";
+        cout << "Node " << s << endl;
         for (auto&  pair: collection.adjlst[s]){
-            cout << " dest: " << pair.first << " weight: " << pair.second << "\n";
+            cout << " dest: " << pair.first << " weight: " << pair.second << endl;
         }
     }
 }
