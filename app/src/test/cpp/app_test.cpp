@@ -62,7 +62,7 @@ void testVectorImplementation() {
 }
 
 
-void testMaltaSmall(){
+void testDijkstraMaltaSmall(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
     adjacencyList listConveter;
@@ -70,11 +70,11 @@ void testMaltaSmall(){
 
     //short area in malta
     BachelorCpp::shortestPathAlgo shortestPath;
-    int from = adjCol.longIdToIntID.find(146885871)->second;
-    int to = adjCol.longIdToIntID.find(1498913919)-> second;
+    int from = listConveter.getIntID(adjCol,146885871);
+    int to = listConveter.getIntID(adjCol,1498913919);
 
-    tuple<double,vector<int>> result;
-    vector<long long int> idvec;
+    tuple<double,vector<int>> result; vector<long long int> idvec;
+
     result = shortestPath.shortestPath(dijkstra, from ,to,adjCol);
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     cout << "testing short distance in malta \n" ;
@@ -82,9 +82,10 @@ void testMaltaSmall(){
     cout << "distance: " << get<0>(result) << "\n";
     cout << "path: ";
     shortestPath.printVec(idvec);
+    cout << "\n";
 }
 
-void testMaltaLarge(){
+void testDijkstraMaltaLarge(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
     adjacencyList listConveter;
@@ -93,10 +94,10 @@ void testMaltaLarge(){
     //short area in malta
     BachelorCpp::shortestPathAlgo shortestPath;
 
-    tuple<double,vector<int>> result;
-    vector<long long int> idvec;
-    int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
-    int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
+    tuple<double,vector<int>> result; vector<long long int> idvec;
+
+    int maltaNorth = listConveter.getIntID(adjCol,3593516725);
+    int maltaSouth = listConveter.getIntID(adjCol,5037683804);
     result = shortestPath.shortestPath(dijkstra,maltaNorth,maltaSouth,adjCol);
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     cout << "testing long distance in malta \n" ;
@@ -121,8 +122,8 @@ void testDijkstraToyExample(){
         dNode = 4,
         eNode = 2
     };
-    tuple<double,vector<int>> result;
-    vector<long long int> idvec;
+    tuple<double,vector<int>> result; vector<long long int> idvec;
+
     result = shortestPath.shortestPath(dijkstra,aNode,bNode,adjCol);
     adjacencyList listConveter;
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
@@ -154,7 +155,7 @@ void testDijkstraToyExample(){
     assert(get<0>(result) == 5);
 }
 
-void testAStarMapIsFilled(){
+void testAStarToyExample(){
     BachelorCpp::createAdjList listMaker;
     adjListCollection adjCol;
     listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/aStarTest","file",adjCol);
@@ -174,6 +175,38 @@ void testAStarMapIsFilled(){
     assert(adjCol.euclidDistance.find(cNode)->second == 4.0);
     assert(adjCol.euclidDistance.find(dNode)->second == 0.0);
     assert(adjCol.euclidDistance.find(eNode)->second == 3.0);
+
+    BachelorCpp::shortestPathAlgo shortestPath;
+    tuple<double,vector<int>> result; vector<long long int> idvec;
+
+    result = shortestPath.shortestPath(astar,aNode,cNode,adjCol);
+    adjacencyList listConveter;
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    shortestPath.printVec(idvec);
+}
+
+void aStarMaltaSmall(){
+    //THIS TEST NEEDS HEURISTIC WEIGHTS!??!?!?!?!?!
+    BachelorCpp::createAdjList listMaker;
+    adjListCollection adjCol;
+    adjacencyList listConveter;
+    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/malta", "file", adjCol);
+
+    //short area in malta
+    BachelorCpp::shortestPathAlgo shortestPath;
+    int from = listConveter.getIntID(adjCol,146885871);
+    int to = listConveter.getIntID(adjCol,1498913919);
+
+    tuple<double,vector<int>> result; vector<long long int> idvec;
+
+    result = shortestPath.shortestPath(astar, from ,to,adjCol);
+    idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
+    cout << "testing short distance in malta \n" ;
+    cout << "from node: 146885871, to node: 1498913919 \n";
+    cout << "distance: " << get<0>(result) << "\n";
+    cout << "path: ";
+    shortestPath.printVec(idvec);
+    cout << "\n";
 }
 
 void communicateWithJava() {
@@ -203,8 +236,6 @@ void communicateWithJava() {
     //BachelorCpp::createAdjList listMaker;
     //adjListCollection adjCol;
     //listMaker.createList("", "java", adjCol);
-
-
 }
 
 
@@ -218,10 +249,12 @@ int main() {
     //communicateWithJava();
     //testMiniDenmarkValues();
     //testMiniDenmarkValues();
-    testMaltaSmall();
-    testMaltaLarge();
-    testDijkstraToyExample();
-    testAStarMapIsFilled();
+    testDijkstraMaltaSmall();
+    //testDijkstraMaltaLarge();
+    //testDijkstraToyExample();
+    //testAStarToyExample();
+
+    //aStarMaltaSmall();
     return 0;
 }
 
