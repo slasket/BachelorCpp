@@ -282,13 +282,10 @@ int main() {
     //testVectorImplementation();
     //testFileWLongs();
     //testFileDenmark();
-    //communicateWithJava();
+    communicateWithJava();
     //testMiniDenmarkValues();
     //testMiniDenmarkValues();
-    testMaltaSmall();
-    testMaltaLarge();
-    testDijkstraToyExample();
-    testAStarMapIsFilled();
+    //testDijkstraToyExample();
     return 0;
 }
 
