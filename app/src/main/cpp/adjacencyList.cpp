@@ -69,3 +69,7 @@ vector<long long int> adjacencyList::spVectorToLongId(adjListCollection &collect
     }
     return vectorWLongs;
 }
+
+void adjacencyList::addEucildDist(adjListCollection &collection, int source, double euclidDist) {
+    collection.euclidDistance.insert(make_pair(source,euclidDist));
+}

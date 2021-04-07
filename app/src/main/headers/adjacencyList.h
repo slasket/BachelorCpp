@@ -7,17 +7,20 @@
 #include <vector>
 #include <map>
 
+
 struct adjListCollection{
     int idSoFar=0;
     std::map<long long int, int> longIdToIntID{};
     std::map<int, long long int> intIdToLongID{};
     std::vector<std::vector<std::pair<int, double>>> adjlst{};
+    std::map<int, double> euclidDistance;
 };
 
 class adjacencyList {
 public:
     void addEdge(adjListCollection &collection, int source, int dest, double weight);
-    //void addEdge(std::vector<int, int> *adjlst, int source, int dest, int weigth);
+
+    void addEucildDist(adjListCollection &collection, int source, double euclidDist);
 
     void printGraph(adjListCollection &collection);
 

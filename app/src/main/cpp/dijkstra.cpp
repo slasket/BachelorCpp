@@ -2,7 +2,7 @@
 // Created by a on 31-03-2021.
 //
 
-#include "djikstra.h"
+#include "dijkstra.h"
 #include "adjacencyList.h"
 #include <vector>
 #include <queue>
@@ -66,7 +66,7 @@ vector<int> createSPList(vector<int> prevNode, int source, int destination){
 }
 
 
-tuple<double, vector<int>> djikstra::djikstraShortestPath(int source, int dest, adjListCollection &adjListCollection) {
+tuple<double, vector<int>> dijkstra::djikstraShortestPath(int source, int dest, adjListCollection &adjListCollection) {
     const double INF = 999999999999;
     int sizeOfGraph = adjListCollection.intIdToLongID.size();
 

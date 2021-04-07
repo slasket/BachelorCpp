@@ -8,7 +8,7 @@
 #include <utility>
 #include <vector>
 #include "adjacencyList.h"
-#include "djikstra.h"
+#include "dijkstra.h"
 #include <tuple>
 
 //name spaces for methods

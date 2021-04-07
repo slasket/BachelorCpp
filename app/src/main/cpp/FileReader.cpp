@@ -34,13 +34,17 @@ int FileReader::readFile(string path, adjListCollection &adjListCollection) {
             int source;
             int dest;
             double weight;
+            double euclidDist;
             for(auto& value: lineAsTokens){
                 char firstChar = value[0];
                 if(firstChar == '#'){
                     long long int sourceID = stoll(value.substr(1,value.size()-1));
                     source = listMutator.insertInMaps(adjListCollection, sourceID);
                     //cout << source << '\n';
-                } else if (firstChar == ';'){
+                }else if (firstChar == '*'){
+                    euclidDist = stod(value.substr(1,value.size()-1));
+                    listMutator.addEucildDist(adjListCollection, source, euclidDist);
+                }else if (firstChar == ';'){
                     long long int destID = stoll(value.substr(1,value.size()-1));
                     dest = listMutator.insertInMaps(adjListCollection, destID);
                     //cout << dest << '\n';

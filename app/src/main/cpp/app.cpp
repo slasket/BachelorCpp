@@ -12,7 +12,7 @@
 #include <FileReader.h>
 #include <sstream>
 #include <chrono>
-#include "djikstra.h"
+#include "dijkstra.h"
 
 using namespace std;
 //DO THE STUFF
@@ -76,10 +76,10 @@ int BachelorCpp::createAdjList::dummyVector(adjListCollection &adjListCollection
 }
 
 tuple<double, vector<int>> BachelorCpp::shortestPathAlgo::shortestPath(int method, int source, int dest, adjListCollection &adjListCollection) {
-    //djikstra=0,astar=1 ect
+    //dijkstra=0,astar=1 ect
     switch (method) {
         case 0:
-            djikstra sspClass;
+            dijkstra sspClass;
             return sspClass.djikstraShortestPath(source,dest,adjListCollection);
         case 1:
             cout << "Not yet Implemented";

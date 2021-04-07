@@ -10,7 +10,7 @@
 using namespace std;
 
 enum shortestPathMethods{
-    djikstra = 0,
+    dijkstra = 0,
     astar = 1
 };
 
@@ -75,7 +75,7 @@ void testMaltaSmall(){
 
     tuple<double,vector<int>> result;
     vector<long long int> idvec;
-    result = shortestPath.shortestPath(djikstra, from ,to,adjCol);
+    result = shortestPath.shortestPath(dijkstra, from ,to,adjCol);
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     cout << "testing short distance in malta \n" ;
     cout << "from node: 146885871, to node: 1498913919 \n";
@@ -95,10 +95,9 @@ void testMaltaLarge(){
 
     tuple<double,vector<int>> result;
     vector<long long int> idvec;
-
     int maltaNorth = adjCol.longIdToIntID.find(3593516725)->second;
     int maltaSouth = adjCol.longIdToIntID.find(5037683804)-> second;
-    result = shortestPath.shortestPath(djikstra,maltaNorth,maltaSouth,adjCol);
+    result = shortestPath.shortestPath(dijkstra,maltaNorth,maltaSouth,adjCol);
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     cout << "testing long distance in malta \n" ;
     cout << "from node: 3593516725, to node: 5037683804 \n";
@@ -107,11 +106,11 @@ void testMaltaLarge(){
     shortestPath.printVec(idvec);
 }
 
-void testDjikstraToyExample(){
+void testDijkstraToyExample(){
     BachelorCpp::createAdjList listMaker;
 
     adjListCollection adjCol;
-    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/djikstraTest","file",adjCol);
+    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/dijkstraTest","file",adjCol);
     BachelorCpp::shortestPathAlgo shortestPath;
     //testing that all the nodes in the toy graph has the smallest path
     enum toyExampleVals{
@@ -124,7 +123,7 @@ void testDjikstraToyExample(){
     };
     tuple<double,vector<int>> result;
     vector<long long int> idvec;
-    result = shortestPath.shortestPath(djikstra,aNode,bNode,adjCol);
+    result = shortestPath.shortestPath(dijkstra,aNode,bNode,adjCol);
     adjacencyList listConveter;
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     //testing a->b gives path a,e,b with distance 4
@@ -133,13 +132,13 @@ void testDjikstraToyExample(){
     assert(idvec[2] == 1);
     assert(get<0>(result) == 4);
 
-    result = shortestPath.shortestPath(djikstra,aNode,eNode,adjCol);
+    result = shortestPath.shortestPath(dijkstra,aNode,eNode,adjCol);
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     assert(idvec[0]==0);
     assert(idvec[1]==4);
     assert(get<0>(result) == 3);
 
-    result = shortestPath.shortestPath(djikstra,aNode,cNode,adjCol);
+    result = shortestPath.shortestPath(dijkstra,aNode,cNode,adjCol);
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     assert(idvec[0]==0);
     assert(idvec[1]==4);
@@ -147,13 +146,34 @@ void testDjikstraToyExample(){
     assert(idvec[3]==2);
     assert(get<0>(result) == 6);
 
-
-    result = shortestPath.shortestPath(djikstra,aNode,dNode,adjCol);
+    result = shortestPath.shortestPath(dijkstra,aNode,dNode,adjCol);
     idvec = listConveter.spVectorToLongId(adjCol, get<1>(result));
     assert(idvec[0]==0);
     assert(idvec[1]==4);
     assert(idvec[2]==3);
     assert(get<0>(result) == 5);
+}
+
+void testAStarMapIsFilled(){
+    BachelorCpp::createAdjList listMaker;
+    adjListCollection adjCol;
+    listMaker.createList("C:/Users/a/CLionProjects/BachelorCpp/app/src/resources/aStarTest","file",adjCol);
+    //BachelorCpp::shortestPathAlgo shortestPath;
+    //testing that all the nodes in the toy graph has the smallest path
+    enum toyExampleVals{
+        //translation table to values after putting the
+        aNode = 0,
+        bNode = 1,
+        cNode = 3,
+        dNode = 4,
+        eNode = 2
+    };
+    //test that the euclidDist has been written correct
+    assert(adjCol.euclidDistance.find(aNode)->second == 5.0);
+    assert(adjCol.euclidDistance.find(bNode)->second == 9.0);
+    assert(adjCol.euclidDistance.find(cNode)->second == 4.0);
+    assert(adjCol.euclidDistance.find(dNode)->second == 0.0);
+    assert(adjCol.euclidDistance.find(eNode)->second == 3.0);
 }
 
 void communicateWithJava() {
@@ -200,7 +220,8 @@ int main() {
     //testMiniDenmarkValues();
     testMaltaSmall();
     testMaltaLarge();
-    testDjikstraToyExample();
+    testDijkstraToyExample();
+    testAStarMapIsFilled();
     return 0;
 }
 
